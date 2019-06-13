@@ -1,0 +1,18 @@
+<% include partials/header %>
+
+<h1>Index Page!</h1>
+
+<% students.forEach(function(student){ %>
+
+<div>
+    <h2><%= student.name %></h2>
+    <p><%= student.email %></p>
+    <p><%= student.number %></p>
+    <p><%= student.designation%></p>
+    <p><%= student.address %></p>
+    <p><%= student.interests %></p>
+</div>
+
+<% }) %>
+
+<% include partials/footer %>
