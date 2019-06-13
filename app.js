@@ -46,6 +46,28 @@ app.get("/students/new", function(req, res) {
 });
 
 //CREATE ROUTE
+app.post("/students", function(req,res){
+  Student.create(req.body.student, function(error,newStudent){
+    if(error){
+      res.render("new");
+    }else{
+      res.redirect("students");
+    }
+    
+  });
+  
+});
+
+//SHOW ROUTE
+app.get("/students/:id", function(req,res){
+  Student.findById(req.params.id, function(err, foundStudent){
+    if(err){
+      res.redirect("/students");
+    }else{
+      res.render("show", {student: foundStudent});
+    }
+  });
+});
 
 app.listen(process.env.PORT, process.env.IP, function() {
   console.log("Server Started!");
