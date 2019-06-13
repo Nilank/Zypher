@@ -1,0 +1,35 @@
+<% include partials/header.ejs %>
+
+
+<div class="ui main text container segment">
+    <div class="ui huge header">Edit Student Information</div>
+    <form class="ui form" action="/students/<%= student._id %>?_method=PUT" method="POST">
+        <div class="field">
+            <label>Name</label>
+            <input type="text" name="student[name]" value= <%= student.name %>/>
+        </div>
+           <div class="field">
+            <label>Email</label>
+            <input type="text" name="student[email]" value= <%= student.email %> />
+        </div>
+           <div class="field">
+            <label>Number</label>
+            <input type="text" name="student[number]" value= <%= student.number %>/>
+        </div>
+            <div class="field">
+            <label>Designation</label>
+            <input type="text" name="student[designation]" value= <%= student.designation %> />
+        </div>
+            <div class="field">
+            <label>Address</label>
+            <input type="text" name="student[address]" value= <%= student.address %>  />
+        </div>
+            <div class="field">
+            <label>Interests</label>
+            <input type="text" name="student[interests]" value= <%= student.interests %>  />
+        </div>
+        <input class="ui violet basic button" type="submit"/>
+    </form>
+</div>
+
+<% include partials/footer.ejs %>
