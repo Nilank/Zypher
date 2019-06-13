@@ -98,9 +98,16 @@ app.put("/students/:id", function(req,res){
 });
 
 //DELETE ROUTE
-// app.delete("/students/:id", function(req,res){
-//   res.send("DELETE ROUTE");
-// });
+app.delete("/students/:id", function(req,res){
+  Student.findByIdAndRemove(req.params.id, function(err){
+    if(err){
+      res.redirect("/students");
+    }else{
+      res.redirect("/students");
+    }
+    
+  });
+});
 
 app.listen(process.env.PORT, process.env.IP, function() {
   console.log("Server Started!");

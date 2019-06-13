@@ -3,7 +3,7 @@
 
 <div class="ui main text container segment">
     <div class="ui huge header">Student Information</div>
-    <form class="ui form" action="/students" method="POST">
+    
         <div class="field">
             <label>Name</label>
             <input type="text" name="student[name]" value= <%= student.name %>/>
@@ -28,7 +28,11 @@
             <label>Interests</label>
             <input type="text" name="student[interests]" value= <%= student.interests %> />
         </div>
-    </form>
+        <a class="ui orange basic button" href="/students/<%= student._id %>/edit">Edit</a>
+        <form id="delete" action="/students/<%= student._id %>?_method=DELETE" method="POST">
+            <button class="ui red basic button">Delete</button>
+        </form>
+
 </div>
 
 <% include partials/footer.ejs %>
