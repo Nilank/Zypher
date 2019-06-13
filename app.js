@@ -86,7 +86,7 @@ app.get("/students/:id/edit", function(req, res) {
 
 //UPDATE ROUTE
 app.put("/students/:id", function(req,res){
-  Student.findByIdAndUpdate(req.params.id, req.body.student, function(err, updatedStudent){
+  Student.findByIdAndUpdate(req.params.id, {$set:req.body}, function(err, updatedStudent){
     if(err){
       res.redirect("/students");
     }else{
