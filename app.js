@@ -11,7 +11,7 @@ var app = express();
 
 seedDB();
 //MongoDB connection
-mongoose.connect("mongodb://nilsharma:nil123@ds337377.mlab.com:37377/nodeassignment",{ useNewUrlParser: true });
+mongoose.connect(process.env.DATABASEURL,{ useNewUrlParser: true });
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
