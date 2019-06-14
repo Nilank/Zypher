@@ -4,7 +4,7 @@ var bodyParser = require("body-parser");
 var expressSanitizer = require("express-sanitizer");
 var methodOverride = require("method-override");
 var Student = require("./models/student");
-//var Comment = require("./models/comment");
+var Comment = require("./models/comment");
 var seedDB = require("./seeds");
 var app = express();
 
@@ -114,6 +114,28 @@ app.get("/students/:id/comments/new", function(req, res) {
         res.render("comments/new", {student: student});
     }
     
+  });
+  
+});
+
+app.post("/students/:id/comments", function(req,res){
+  Student.findById(req.params.id, function(err, student) {
+    if(err){
+      console.log(err);
+      res.redirect("/students");
+    }else{
+      Comment.create(req.body.comment, function(err,comment){
+        if(err){
+          console.log(err);
+        }else{
+          student.comments.push(comment);
+          student.save();
+          res.redirect("/students/" + student._id);
+        }
+        
+      });
+    }
+      
   });
   
 });

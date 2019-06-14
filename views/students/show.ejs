@@ -29,6 +29,7 @@
             <input type="text" name="student[interests]" value= <%= student.interests %> />
         </div>
         <a class="ui orange basic button" href="/students/<%= student._id %>/edit">Edit</a>
+        <a class="ui green basic button" href="/students/<%= student._id %>/comments/new">Comment</a>
         <form id="delete" action="/students/<%= student._id %>?_method=DELETE" method="POST">
             <button class="ui red basic button">Delete</button>
         </form>
@@ -44,11 +45,11 @@
 <center>
 <div class="ui list">
   <div class="item">
-      <% student.comments.forEach(function(comment){ %>
-    <img class="ui avatar image" src="/images/avatar2/small/rachel.png">
+      <% student.comments.forEach(function(comment){ %> <br>
+    <i class="user secret icon"></i>
     <div class="content">
       <a class="header"><%= comment.author %></a>
-      <div class="description">Last seen watching <a><b><%= comment.text %></b></a> just now.</div>
+      <div class="description">Last seen watching <a><b><%= comment.text %></b></a> just now.</div> <br>
     </div>
     <% }) %>
   </div>
