@@ -1,0 +1,19 @@
+<% include ../partials/header.ejs %>
+
+<div class="ui main text container segment">
+    <div class="ui huge header">New Comment</div>
+    <form class="ui form" action="/students/<%=student._id%>/comments" method="POST">
+        <div class="field">
+            <label>Author</label>
+            <input type="text" name="comment[author]" placeholder="Author Name" required/>
+        </div>
+           <div class="field">
+            <label>Text</label>
+            <input type="text" name="comment[text]" placeholder="Comment Desc" required />
+        </div>
+        <input class="ui violet basic button" type="submit"/>
+    </form>
+</div>
+
+
+<% include ../partials/footer.ejs %>

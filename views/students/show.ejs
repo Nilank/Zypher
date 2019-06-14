@@ -1,4 +1,4 @@
-<% include partials/header.ejs %>
+<% include ../partials/header.ejs %>
 
 
 <div class="ui main text container segment">
@@ -35,4 +35,24 @@
 
 </div>
 
-<% include partials/footer.ejs %>
+
+<h2 class="ui center aligned icon header">
+  <i class="circular users icon"></i>
+  Comments
+</h2>
+
+<center>
+<div class="ui list">
+  <div class="item">
+      <% student.comments.forEach(function(comment){ %>
+    <img class="ui avatar image" src="/images/avatar2/small/rachel.png">
+    <div class="content">
+      <a class="header"><%= comment.author %></a>
+      <div class="description">Last seen watching <a><b><%= comment.text %></b></a> just now.</div>
+    </div>
+    <% }) %>
+  </div>
+</div>
+</center>
+
+<% include ../partials/footer.ejs %>

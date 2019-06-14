@@ -6,7 +6,13 @@ var studentSchema = new mongoose.Schema({
   number: Number,
   designation: String,
   address: String,
-  interests: Array
+  interests: Array,
+  comments:[
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment"
+    }
+    ]
 });
 
 module.exports = mongoose.model("Student", studentSchema);
