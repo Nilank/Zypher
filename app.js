@@ -1,7 +1,9 @@
 var express = require("express");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
+var expressSanitizer = require("express-sanitizer");
 var methodOverride = require("method-override");
+var Student = require("./models/student");
 var app = express();
 
 //MongoDB connection
@@ -12,18 +14,19 @@ mongoose.connect(
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressSanitizer());
 app.use(methodOverride("_method"));
 
-var studentSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  number: Number,
-  designation: String,
-  address: String,
-  interests: Array
-});
+// var studentSchema = new mongoose.Schema({
+//   name: String,
+//   email: String,
+//   number: Number,
+//   designation: String,
+//   address: String,
+//   interests: Array
+// });
 
-var Student = mongoose.model("Student", studentSchema);
+// var Student = mongoose.model("Student", studentSchema);
 
 app.get("/",function(req,res){
   res.redirect("/students");
@@ -49,6 +52,7 @@ app.get("/students/new", function(req, res) {
 
 //CREATE ROUTE
 app.post("/students", function(req,res){
+  req.body.student.body = req.sanitize(req.body.student.body);
   Student.create(req.body.student, function(error,newStudent){
     if(error){
       res.render("new");
@@ -86,15 +90,14 @@ app.get("/students/:id/edit", function(req, res) {
 
 //UPDATE ROUTE
 app.put("/students/:id", function(req,res){
-  Student.findByIdAndUpdate(req.params.id, {$set:req.body}, function(err, updatedStudent){
+  req.body.student.body = req.sanitize(req.body.student.body);
+  Student.findByIdAndUpdate(req.params.id, req.body.student, function(err,foundStudent){
     if(err){
       res.redirect("/students");
     }else{
       res.redirect("/students/" + req.params.id);
     }
-    
   });
-  
 });
 
 //DELETE ROUTE
